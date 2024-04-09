@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getQuestionsHandler,
@@ -19,6 +19,29 @@ function App() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.questions);
   const users = useSelector((state) => state.users);
+  const [optionOne, setOptionOne] = useState("");
+  const [optionTwo, setOptionTwo] = useState("");
+
+  const handleOptionOneChange = (e) => {
+    setOptionOne(e.target.value);
+  };
+
+  const handleOptionTwoChange = (e) => {
+    setOptionTwo(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    const question = {
+      author: "tylermcginnis",
+      optionOneText: optionOne,
+      optionTwoText: optionTwo,
+    };
+
+    dispatch(addQuestionHandler(question));
+
+    setOptionOne("");
+    setOptionTwo("");
+  };
 
   const fetchQuestions = () => {
     console.log("Fetching questions...");
@@ -30,30 +53,19 @@ function App() {
     dispatch(getUsersHandler());
   };
 
-  const newQuestion = () => {
+  const newAnswer = () => {
     console.log("Creating new question...");
 
-    const question = {
-      author: "tylermcginnis",
-      optionOneText: "Mexerica",
-      optionTwoText: "Pokan",
+    const answer = {
+      authedUser: "alicia",
+      qid: "am8ehyc8byjqgar0jgpub9",
+      answer: "optionTwo",
     };
 
-    dispatch(addQuestionHandler(question));
+    dispatch(addQuestionHandler(answer));
   };
 
-  // const newAnswer = () => {
-  //   console.log("Creating new question...");
-
-  //   const answer = {
-  //     authedUser: "alicia",
-  //     qid: "am8ehyc8byjqgar0jgpub9",
-  //     answer: "optionTwo",
-  //   };
-
-  //   dispatch(addQuestionHandler(answer));
-  // };
-
+  console.log(newAnswer);
   console.log("questions:", questions);
   console.log("users:", users);
   return (
@@ -65,12 +77,21 @@ function App() {
         <button type="button" onClick={fetchUsers}>
           Fetch Users
         </button>
-        <button type="button" onClick={newQuestion}>
-          NewQuestion
+        <button type="button" onClick={newAnswer}>
+          new Answer
+        </button>
+        <input type="text" value={optionOne} onChange={handleOptionOneChange} />
+        <input type="text" value={optionTwo} onChange={handleOptionTwoChange} />
+        <button type="button" onClick={handleSubmit}>
+          Submit
         </button>
         <ul>
           {questions.map((question) => (
-            <li key={question.id}>{question.optionOne.text}</li>
+            <li key={question.id}>
+              {question.optionOne.text}
+              <br />
+              {question.optionTwo.text}
+            </li>
           ))}
         </ul>
         <ul>
