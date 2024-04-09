@@ -12,6 +12,16 @@ let users = {
       },
       questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
     },
+    alicia: {
+      id: 'alicia',
+      password:'password123',
+      name: 'Alicia Antunes',
+      avatarURL: null,
+      answers: {
+
+      },
+      questions: []
+    },
     tylermcginnis: {
       id: 'tylermcginnis',
       password:'abc321',
