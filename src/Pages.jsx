@@ -9,23 +9,6 @@ import LeaderBoard from './pages/LeaderBoard';
 function Pages() {
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/new">New Question</Link>
-          </li>
-          <li>
-            <Link to="/leaderboard">LeaderBoard</Link>
-          </li>
-        </ul>
-      </nav>
-
       <Route
         path="/"
         component={Home}
@@ -42,6 +25,22 @@ function Pages() {
         path="/leaderboard"
         component={LeaderBoard}
       />
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <Link to="/new">New Question</Link>
+          </li>
+          <li>
+            <Link to="/leaderboard">LeaderBoard</Link>
+          </li>
+        </ul>
+      </nav>
     </div>
   );
 }
