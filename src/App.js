@@ -27,6 +27,18 @@ function App() {
     dispatch(addQuestionHandler(question));
   };
 
+  const newAnswer = () => {
+    console.log('Creating new question...');
+
+    const answer = {
+      authedUser: 'sarahedo',
+      qid: 'am8ehyc8byjqgar0jgpub9',
+      answer: 'optionTwo',
+    }
+
+    dispatch(addQuestionHandler(answer));
+  };
+  
   console.log('questions:', questions);
   console.log('users:', users);
   return (
