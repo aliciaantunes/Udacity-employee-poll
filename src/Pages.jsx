@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Link } from 'wouter';
 
+import GateKeeper from './components/GateKeeper';
+
 import Login from './pages/Login';
 import Home from './pages/Home';
 import NewQuestion from './pages/NewQuestion';
@@ -9,13 +11,14 @@ import LeaderBoard from './pages/LeaderBoard';
 function Pages() {
   return (
     <div>
-      <Route
-        path="/"
-        component={Home}
-      />
+      <GateKeeper publicPaths={['leaderboard']} />
       <Route
         path="/login"
         component={Login}
+      />
+      <Route
+        path="/"
+        component={Home}
       />
       <Route
         path="/new"
