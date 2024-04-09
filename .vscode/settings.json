@@ -1,0 +1,8 @@
+{
+    "editor.renderWhitespace": "none",
+    "editor.tabSize": 2,
+    "files.eol": "\n",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+    }
+  }
