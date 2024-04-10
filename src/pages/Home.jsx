@@ -11,12 +11,12 @@ function Home() {
 
   useEffect(() => {
     dispatch(getQuestionsHandler());
-  }, [dispatch, questions]);
+  }, [dispatch]);
 
   // loop infinito?
   useEffect(() => {
     dispatch(getUsersHandler());
-  }, [dispatch, users]);
+  }, [dispatch]);
 
   console.log(users);
 

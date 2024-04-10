@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getQuestionsHandler,
-  getUsersHandler,
   addQuestionHandler,
-} from "./redux/action-handlers/questionsActions";
+} from './redux/action-handlers/questionsActions';
+import { getUsersHandler } from './redux/action-handlers/userActions';
 
 // Redux flow:
 // 1. User click in the button to fetch
@@ -19,8 +19,8 @@ function App() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.questions);
   const users = useSelector((state) => state.users);
-  const [optionOne, setOptionOne] = useState("");
-  const [optionTwo, setOptionTwo] = useState("");
+  const [optionOne, setOptionOne] = useState('');
+  const [optionTwo, setOptionTwo] = useState('');
 
   const handleOptionOneChange = (e) => {
     setOptionOne(e.target.value);
@@ -32,57 +32,77 @@ function App() {
 
   const handleSubmit = () => {
     const question = {
-      author: "tylermcginnis",
+      user: 'tylermcginnis',
       optionOneText: optionOne,
       optionTwoText: optionTwo,
     };
 
     dispatch(addQuestionHandler(question));
 
-    setOptionOne("");
-    setOptionTwo("");
+    setOptionOne('');
+    setOptionTwo('');
   };
 
   const fetchQuestions = () => {
-    console.log("Fetching questions...");
+    console.log('Fetching questions...');
     dispatch(getQuestionsHandler());
   };
 
   const fetchUsers = () => {
-    console.log("Fetching users...");
+    console.log('Fetching users...');
     dispatch(getUsersHandler());
   };
 
   const newAnswer = () => {
-    console.log("Creating new question...");
+    console.log('Creating new question...');
 
     const answer = {
-      authedUser: "alicia",
-      qid: "am8ehyc8byjqgar0jgpub9",
-      answer: "optionTwo",
+      authedUser: 'alicia',
+      qid: 'am8ehyc8byjqgar0jgpub9',
+      answer: 'optionTwo',
     };
 
     dispatch(addQuestionHandler(answer));
   };
 
   console.log(newAnswer);
-  console.log("questions:", questions);
-  console.log("users:", users);
+  console.log('questions:', questions);
+  console.log('users:', users);
   return (
     <div className="App">
       <header className="App-header">
-        <button type="button" onClick={fetchQuestions}>
+        <button
+          type="button"
+          onClick={fetchQuestions}
+        >
           Fetch Questions
         </button>
-        <button type="button" onClick={fetchUsers}>
+        <button
+          type="button"
+          onClick={fetchUsers}
+        >
           Fetch Users
         </button>
-        <button type="button" onClick={newAnswer}>
+        <button
+          type="button"
+          onClick={newAnswer}
+        >
           new Answer
         </button>
-        <input type="text" value={optionOne} onChange={handleOptionOneChange} />
-        <input type="text" value={optionTwo} onChange={handleOptionTwoChange} />
-        <button type="button" onClick={handleSubmit}>
+        <input
+          type="text"
+          value={optionOne}
+          onChange={handleOptionOneChange}
+        />
+        <input
+          type="text"
+          value={optionTwo}
+          onChange={handleOptionTwoChange}
+        />
+        <button
+          type="button"
+          onClick={handleSubmit}
+        >
           Submit
         </button>
         <ul>
