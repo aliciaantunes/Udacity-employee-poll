@@ -1,16 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = [];
 
 const questionsSlice = createSlice({
-  name: "questions",
+  name: 'questions',
   initialState,
   reducers: {
     updateQuestions: (state, action) => {
       // transform action.payload to an array
-      console.log("action.payload:", action.payload);
+      console.log('action.payload:', action.payload);
       const newQuestions = Object.values(action.payload);
-      console.log("newQuestions:", newQuestions);
+      console.log('newQuestions:', newQuestions);
 
       return newQuestions;
     },
