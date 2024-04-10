@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+// eslint-disable-next-line import/no-unresolved
+import { loginHandler } from '../redux/action-handlers/sessionActions';
 
 function LoginForm() {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState('tylermcginnis');
   const [password, setPassword] = useState('abc321');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`Username: ${username}, Password: ${password}`);
+    dispatch(loginHandler(username, password));
   };
 
   return (
@@ -56,5 +61,4 @@ function LoginForm() {
     </div>
   );
 }
-
 export default LoginForm;
