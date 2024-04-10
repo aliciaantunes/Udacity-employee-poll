@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { loginHandler } from '../redux/action-handlers/sessionActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addQuestionHandler } from '../redux/action-handlers/questionsActions';
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const authedUser = useSelector((state) => state.session.user);
   const [optionOne, setoptionOne] = useState('');
   const [optionTwo, setoptionTwo] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(`optionOne: ${optionOne}, optionTwo: ${optionTwo}`);
-    dispatch(loginHandler(optionOne, optionTwo));
+    dispatch(
+      addQuestionHandler({
+        author: authedUser.id,
+        optionOneText: optionOne,
+        optionTwoText: optionTwo,
+      })
+    );
   };
 
   return (
@@ -24,7 +31,7 @@ function LoginForm() {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="optionOne"
           >
-            optionOne:
+            Option One:
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="optionOne"
@@ -39,7 +46,7 @@ function LoginForm() {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="optionTwo"
           >
-            optionTwo:
+            Option Two:
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="optionTwo"

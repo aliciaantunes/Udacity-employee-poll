@@ -5,6 +5,7 @@ import { Link } from 'wouter';
 import PropTypes from 'prop-types';
 
 function Card({ question, author }) {
+  console.log('author', author);
   console.log(author?.avatarURL);
 
   return (

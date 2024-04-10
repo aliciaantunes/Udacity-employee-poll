@@ -8,30 +8,58 @@ function Home() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.questions);
   const users = useSelector((state) => state.users);
+  const authedUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(getQuestionsHandler());
   }, [dispatch]);
 
-  // loop infinito?
   useEffect(() => {
     dispatch(getUsersHandler());
   }, [dispatch]);
 
   console.log(users);
 
+  const unanswered = (question) =>
+    !question.optionOne.votes.includes(authedUser.id) &&
+    !question.optionTwo.votes.includes(authedUser.id);
+
+  const answered = (question) =>
+    question.optionOne.votes.includes(authedUser.id) ||
+    question.optionTwo.votes.includes(authedUser.id);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Home</h1>
-        {questions.map((question) => (
-          <Card
-            key={question.id}
-            question={question}
-            user={users[question.user]}
-          />
+    <div>
+      <h1
+        className="text-3xl font-bold mt-9"
+        data-testid="heading"
+      >
+        Dashboard
+      </h1>
+
+      <h2 className="text-2xl font-bold mt-6">New Questions</h2>
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {questions.filter(unanswered).map((question) => (
+          <li key={question.id}>
+            <Card
+              question={question}
+              author={users[question.author]}
+            />
+          </li>
         ))}
-      </header>
+      </ul>
+
+      <h2 className="text-2xl font-bold mt-6">Answered Questions</h2>
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {questions.filter(answered).map((question) => (
+          <li key={question.id}>
+            <Card
+              question={question}
+              author={users[question.author]}
+            />
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
