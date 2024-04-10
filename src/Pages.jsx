@@ -1,7 +1,10 @@
 import React from 'react';
-import { Route, Link } from 'wouter';
+import { Route } from 'wouter';
 
 import GateKeeper from './components/GateKeeper';
+
+// eslint-disable-next-line import/no-unresolved
+import Nav from './components/Navbar';
 
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -12,6 +15,7 @@ function Pages() {
   return (
     <div>
       <GateKeeper publicPaths={['leaderboard']} />
+      <Nav />
       <Route
         path="/login"
         component={Login}
@@ -28,24 +32,7 @@ function Pages() {
         path="/leaderboard"
         component={LeaderBoard}
       />
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/new">New Question</Link>
-          </li>
-          <li>
-            <Link to="/leaderboard">LeaderBoard</Link>
-          </li>
-        </ul>
-      </nav>
     </div>
   );
 }
-
 export default Pages;
