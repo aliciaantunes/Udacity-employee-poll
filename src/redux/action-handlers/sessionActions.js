@@ -9,8 +9,6 @@ export const loginHandler = (username, password) => async (dispatch) => {
       (user) => user.id === username && user.password === password
     );
 
-    console.log('LoggedUser:', LoggedUser);
-
     // add only the necessary data to the store
     dispatch(
       login({
