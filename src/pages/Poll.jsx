@@ -12,9 +12,6 @@ function PollPage() {
     state.questions.find((q) => q.id === id)
   );
 
-  console.log('authedUser:', authedUser);
-  console.log('id:', id);
-
   const hasVotedForOptionOne = question.optionOne.votes.includes(authedUser.id);
   const hasVotedForOptionTwo = question.optionTwo.votes.includes(authedUser.id);
   const hasVoted = hasVotedForOptionOne || hasVotedForOptionTwo;
@@ -36,7 +33,7 @@ function PollPage() {
       addQuestionAnswerHandler({
         authedUser: authedUser.id,
         qid: question.id,
-        answer: 'optionOne',
+        answer: 'optionTwo',
       })
     );
   };
@@ -57,6 +54,9 @@ function PollPage() {
   };
 
   console.log('question:', question);
+  console.log('autheduser', authedUser);
+  console.log('hasVotedForOptionOne', hasVotedForOptionOne);
+  console.log('hasVotedForOptionTwo', hasVotedForOptionTwo);
 
   return (
     <div>
@@ -75,8 +75,8 @@ function PollPage() {
           type="button"
           onClick={handleOptionOne}
           disabled={hasVoted}
-          className={`p-2 rounded-xl bg-zinc-100 hover:shadow-xl transition ${
-            hasVotedForOptionOne ? 'bg-lime-400' : ''
+          className={`p-2 rounded-xl hover:shadow-xl transition ${
+            hasVotedForOptionOne ? 'bg-lime-400' : 'bg-zinc-100'
           }`}
         >
           <div className={hasVotedForOptionOne ? 'chosen' : ''}>
@@ -97,8 +97,8 @@ function PollPage() {
           type="button"
           onClick={handleOptionTwo}
           disabled={hasVoted}
-          className={`p-2 rounded-xl bg-zinc-100 hover:shadow-xl transition ${
-            hasVotedForOptionTwo ? 'bg-lime-400' : ''
+          className={`p-2 rounded-xl hover:shadow-xl transition ${
+            hasVotedForOptionTwo ? 'bg-lime-400' : 'bg-zinc-100'
           }`}
         >
           <p className="font-bold mb-2">{question.optionTwo.text}</p>

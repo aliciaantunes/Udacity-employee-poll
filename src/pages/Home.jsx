@@ -21,12 +21,14 @@ function Home() {
   console.log(users);
 
   const unanswered = (question) =>
-    !question.optionOne.votes.includes(authedUser.id) &&
-    !question.optionTwo.votes.includes(authedUser.id);
+    !question?.optionOne?.votes.includes(authedUser.id) &&
+    !question?.optionTwo?.votes.includes(authedUser.id);
 
   const answered = (question) =>
-    question.optionOne.votes.includes(authedUser.id) ||
-    question.optionTwo.votes.includes(authedUser.id);
+    question?.optionOne?.votes.includes(authedUser.id) ||
+    question?.optionTwo?.votes.includes(authedUser.id);
+
+  console.log(answered);
 
   return (
     <div>

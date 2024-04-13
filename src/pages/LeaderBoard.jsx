@@ -1,6 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 function LeaderBoard() {
+  const users = useSelector((state) => state.users);
+  const usersSorted = Object.values(users).sort(
+    (a, b) => Object.keys(b.answers).length - Object.keys(a.answers).length
+  );
+
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -30,29 +36,19 @@ function LeaderBoard() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    User1
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    10
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    5
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    User2
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    15
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    7
-                  </td>
-                </tr>
-                {/* Add more rows as needed */}
+                {Object.values(usersSorted).map((user) => (
+                  <tr>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {user.name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {Object.keys(user.answers).length}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {user.questions.length}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
