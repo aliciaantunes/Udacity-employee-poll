@@ -15,8 +15,6 @@ const questionsSlice = createSlice({
     addQuestion: (state, action) => {
       state.push(action.payload);
     },
-    removeQuestion: (state, action) =>
-      state.filter((question) => question !== action.payload),
     updateAnswer: (state, action) => {
       const { question, answer } = action.payload;
       const questionToUpdate = state.find((q) => q.question === question);

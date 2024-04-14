@@ -28,16 +28,15 @@ export const addQuestionHandler = (question) => async (dispatch) => {
 export const addQuestionAnswerHandler = (question) => async (dispatch) => {
   const { authedUser, qid, answer } = question;
   try {
-    const payload = await _saveQuestionAnswer({
+    const successful = await _saveQuestionAnswer({
       authedUser,
       qid,
       answer,
     });
 
-    dispatch(addQuestion(payload));
-
-    // Navigate to a new page after successful creating a new question
-    window.history.pushState(null, '', '/');
+    if (successful) {
+      dispatch(getQuestionsHandler());
+    }
   } catch (error) {
     console.error(error);
   }
