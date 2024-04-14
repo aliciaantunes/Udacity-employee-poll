@@ -14,14 +14,7 @@ let users = {
     },
     questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
   },
-  alicia: {
-    id: "alicia",
-    password: "password123",
-    name: "Alicia Antunes",
-    avatarURL: null,
-    answers: {},
-    questions: [],
-  },
+
   tylermcginnis: {
     id: "tylermcginnis",
     password: "abc321",
@@ -61,6 +54,7 @@ let questions = {
   "8xf0y6ziyjabvozdd253nd": {
     id: "8xf0y6ziyjabvozdd253nd",
     author: "sarahedo",
+    avatarURL: 'https://github.com/sarah.png',
     timestamp: 1467166872634,
     optionOne: {
       votes: ["sarahedo"],
@@ -74,6 +68,7 @@ let questions = {
   "6ni6ok3ym7mf1p33lnez": {
     id: "6ni6ok3ym7mf1p33lnez",
     author: "mtsamis",
+    avatarURL: 'https://github.com/mike.png',
     timestamp: 1468479767190,
     optionOne: {
       votes: [],
@@ -87,6 +82,7 @@ let questions = {
   am8ehyc8byjqgar0jgpub9: {
     id: "am8ehyc8byjqgar0jgpub9",
     author: "sarahedo",
+    avatarURL: 'https://github.com/sarah.png',
     timestamp: 1488579767190,
     optionOne: {
       votes: [],
@@ -100,6 +96,7 @@ let questions = {
   loxhs1bqm25b708cmbf3g: {
     id: "loxhs1bqm25b708cmbf3g",
     author: "tylermcginnis",
+    avatarURL: 'https://github.com/tyler.png',
     timestamp: 1482579767190,
     optionOne: {
       votes: [],
@@ -113,6 +110,7 @@ let questions = {
   vthrdm985a262al8qx3do: {
     id: "vthrdm985a262al8qx3do",
     author: "tylermcginnis",
+    avatarURL: 'https://github.com/tyler.png',
     timestamp: 1489579767190,
     optionOne: {
       votes: ["tylermcginnis"],
@@ -126,6 +124,7 @@ let questions = {
   xj352vofupe1dqz9emx13r: {
     id: "xj352vofupe1dqz9emx13r",
     author: "mtsamis",
+    avatarURL: 'https://github.com/mike.png',
     timestamp: 1493579767190,
     optionOne: {
       votes: ["mtsamis", "zoshikanlu"],

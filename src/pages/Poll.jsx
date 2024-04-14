@@ -53,17 +53,14 @@ function PollPage() {
     }
   };
 
-  console.log('question:', question);
-  console.log('autheduser', authedUser);
-  console.log('hasVotedForOptionOne', hasVotedForOptionOne);
-  console.log('hasVotedForOptionTwo', hasVotedForOptionTwo);
-
   return (
     <div>
-      {/* <h1 className="text-3xl font-bold mt-9">Poll by {author.id}</h1> */}
-
       <div className="flex justify-center">
-        {/* <img src={author.avatarURL} alt="Profile" className="h-24 w-24" /> */}
+        <img
+          src={question.avatarURL}
+          alt="Profile"
+          className="h-24 w-24"
+        />
       </div>
 
       <div className="flex justify-center">
