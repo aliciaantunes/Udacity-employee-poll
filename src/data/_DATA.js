@@ -189,6 +189,15 @@ export function _saveQuestion(question) {
         [formattedQuestion.id]: formattedQuestion,
       };
 
+      // Add the new question's id to the author's question list
+      users = {
+        ...users,
+        [formattedQuestion.author]: {
+          ...users[formattedQuestion.author],
+          questions: users[formattedQuestion.author].questions.concat([formattedQuestion.id]),
+        },
+      };
+
       resolve(formattedQuestion);
     }, 1000);
   });
