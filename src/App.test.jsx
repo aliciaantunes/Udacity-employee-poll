@@ -57,4 +57,16 @@ describe('App', () => {
     const questionList = screen.getByRole('list');
     expect(questionList.children.length).toBe(0);
   });
+
+  describe('App component', () => {
+    it('should match the snapshot', () => {
+      const { asFragment } = render(
+        <Provider store={store}>
+          <App />
+        </Provider>
+      );
+
+      expect(asFragment()).toMatchSnapshot();
+    });
+  });
 });
