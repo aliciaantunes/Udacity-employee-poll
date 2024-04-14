@@ -38,7 +38,7 @@ function LeaderBoard() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {Object.values(usersSorted).map((user) => (
-                  <tr>
+                  <tr key={user.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {user.name}
                     </td>

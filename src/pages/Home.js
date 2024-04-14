@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestionsHandler } from '../redux/action-handlers/questionsActions';
 import { getUsersHandler } from '../redux/action-handlers/userActions';
@@ -22,6 +22,8 @@ function Home() {
     dispatch(getUsersHandler());
   }, [dispatch]);
 
+  const [showAnswered, setShowAnswered] = useState(false);
+
   const unanswered = (question) =>
     !question?.optionOne?.votes.includes(authedUser?.id) &&
     !question?.optionTwo?.votes.includes(authedUser?.id);
@@ -39,28 +41,32 @@ function Home() {
         Dashboard
       </h1>
 
-      <h2 className="text-2xl font-bold mt-6">New Questions</h2>
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {sortedQuestions.filter(unanswered).map((question) => (
-          <li key={question.id}>
-            <Card
-              question={question}
-              author={users[question.author]}
-            />
-          </li>
-        ))}
-      </ul>
+      <button
+        type="button"
+        onClick={() => setShowAnswered(false)}
+        className={`mr-4 ${!showAnswered ? 'text-blue-500' : ''}`}
+      >
+        New Questions
+      </button>
+      <button
+        type="button"
+        onClick={() => setShowAnswered(true)}
+        className={`${showAnswered ? 'text-blue-500' : ''}`}
+      >
+        Answered Questions
+      </button>
 
-      <h2 className="text-2xl font-bold mt-6">Answered Questions</h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {sortedQuestions.filter(answered).map((question) => (
-          <li key={question.id}>
-            <Card
-              question={question}
-              author={users[question.author]}
-            />
-          </li>
-        ))}
+        {sortedQuestions
+          .filter(showAnswered ? answered : unanswered)
+          .map((question) => (
+            <li key={question.id}>
+              <Card
+                question={question}
+                author={users[question.author]}
+              />
+            </li>
+          ))}
       </ul>
     </div>
   );

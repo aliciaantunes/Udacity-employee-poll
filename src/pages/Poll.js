@@ -6,7 +6,8 @@ import { useParams, useLocation } from 'wouter';
 import { addQuestionAnswerHandler } from '../redux/action-handlers/questionsActions';
 
 function PollPage() {
-  const [setLocation] = useLocation();
+  // eslint-disable-next-line no-unused-vars
+  const [_, setLocation] = useLocation();
   const { id } = useParams();
   const dispatch = useDispatch();
   const authedUser = useSelector((state) => state.session.user);
@@ -15,19 +16,17 @@ function PollPage() {
   );
 
   useEffect(() => {
-    if (!authedUser) {
-      setLocation('./Login');
-    }
-  }, [authedUser, setLocation]);
-
-  useEffect(() => {
     if (authedUser && !question) {
-      setLocation('./404'); // Use setLocation for navigation
+      setLocation('/404'); // Use setLocation for navigation
     }
   }, [authedUser, question, setLocation]);
 
-  const hasVotedForOptionOne = question.optionOne.votes.includes(authedUser.id);
-  const hasVotedForOptionTwo = question.optionTwo.votes.includes(authedUser.id);
+  const hasVotedForOptionOne = question?.optionOne.votes.includes(
+    authedUser.id
+  );
+  const hasVotedForOptionTwo = question?.optionTwo.votes.includes(
+    authedUser.id
+  );
   const hasVoted = hasVotedForOptionOne || hasVotedForOptionTwo;
 
   const handleOptionOne = (e) => {
@@ -53,6 +52,8 @@ function PollPage() {
   };
 
   const calcPercentage = (option, questionParam) => {
+    if (!questionParam) return '';
+
     const numberVotesTotal =
       questionParam.optionOne.votes.length +
       questionParam.optionTwo.votes.length;
@@ -71,7 +72,7 @@ function PollPage() {
     <div>
       <div className="flex justify-center">
         <img
-          src={question.avatarURL}
+          src={question?.avatarURL}
           alt="Profile"
           className="h-24 w-24"
         />
@@ -91,13 +92,13 @@ function PollPage() {
           }`}
         >
           <div className={hasVotedForOptionOne ? 'chosen' : ''}>
-            <p className="font-bold mb-2">{question.optionOne.text}</p>
+            <p className="font-bold mb-2">{question?.optionOne.text}</p>
             {!hasVoted && (
               <p className="underline underline-offset-4 mb-3">Click</p>
             )}
             {hasVoted && (
               <p className="text-xs">
-                Votes: {question.optionOne.votes.length} (
+                Votes: {question?.optionOne.votes.length} (
                 {calcPercentage('optionOne', question)})
               </p>
             )}
@@ -112,13 +113,13 @@ function PollPage() {
             hasVotedForOptionTwo ? 'bg-lime-400' : 'bg-zinc-100'
           }`}
         >
-          <p className="font-bold mb-2">{question.optionTwo.text}</p>
+          <p className="font-bold mb-2">{question?.optionTwo.text}</p>
           {!hasVoted && (
             <p className="underline underline-offset-4 mb-3">Click</p>
           )}
           {hasVoted && (
             <p className="text-xs">
-              Votes: {question.optionTwo.votes.length} (
+              Votes: {question?.optionTwo.votes.length} (
               {calcPercentage('optionTwo', question)})
             </p>
           )}
