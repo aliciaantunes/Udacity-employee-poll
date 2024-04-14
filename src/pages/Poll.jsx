@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'wouter';
+import { useParams, useLocation } from 'wouter';
 // eslint-disable-next-line import/named
 import { addQuestionAnswerHandler } from '../redux/action-handlers/questionsActions';
 
 function PollPage() {
+  const [setLocation] = useLocation();
   const { id } = useParams();
   const dispatch = useDispatch();
   const authedUser = useSelector((state) => state.session.user);
   const question = useSelector((state) =>
     state.questions.find((q) => q.id === id)
   );
+
+  useEffect(() => {
+    if (!authedUser) {
+      setLocation('./Login');
+    }
+  }, [authedUser, setLocation]);
+
+  useEffect(() => {
+    if (authedUser && !question) {
+      setLocation('./404'); // Use setLocation for navigation
+    }
+  }, [authedUser, question, setLocation]);
 
   const hasVotedForOptionOne = question.optionOne.votes.includes(authedUser.id);
   const hasVotedForOptionTwo = question.optionTwo.votes.includes(authedUser.id);
