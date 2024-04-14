@@ -151,11 +151,8 @@ export function _getUsers() {
 }
 
 export function _getQuestions() {
-  console.log("Fake API call to get questions...");
   return new Promise((resolve) => {
-    console.log("Fake API call to get questions...resolved");
     setTimeout(() => resolve({ ...questions }), 1000);
-    console.log("Fake API call to get questions...resolved");
   });
 }
 
@@ -176,7 +173,6 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
 }
 
 export function _saveQuestion(question) {
-  console.log("question:", question);
   return new Promise((resolve, reject) => {
     if (
       !question.optionOneText ||

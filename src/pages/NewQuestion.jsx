@@ -10,7 +10,6 @@ function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`optionOne: ${optionOne}, optionTwo: ${optionTwo}`);
     dispatch(
       addQuestionHandler({
         author: authedUser.id,

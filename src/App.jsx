@@ -18,7 +18,6 @@ import { getUsersHandler } from './redux/action-handlers/userActions';
 function App() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.questions);
-  const users = useSelector((state) => state.users);
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
 
@@ -44,18 +43,14 @@ function App() {
   };
 
   const fetchQuestions = () => {
-    console.log('Fetching questions...');
     dispatch(getQuestionsHandler());
   };
 
   const fetchUsers = () => {
-    console.log('Fetching users...');
     dispatch(getUsersHandler());
   };
 
   const newAnswer = () => {
-    console.log('Creating new question...');
-
     const answer = {
       authedUser: 'alicia',
       qid: 'am8ehyc8byjqgar0jgpub9',
@@ -65,9 +60,6 @@ function App() {
     dispatch(addQuestionHandler(answer));
   };
 
-  console.log(newAnswer);
-  console.log('questions:', questions);
-  console.log('users:', users);
   return (
     <div className="App">
       <header className="App-header">

@@ -5,9 +5,6 @@ import { Link } from 'wouter';
 import PropTypes from 'prop-types';
 
 function Card({ question, author }) {
-  console.log('author', author);
-  console.log(author?.avatarURL);
-
   return (
     <Link to={`questions/${question.id}`}>
       <div className="m-3 p-2 rounded-xl shadow-md hover:shadow-xl transition bg-zinc-300 max-w-sm mx-auto flex items-center space-x-4">

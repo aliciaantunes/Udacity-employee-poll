@@ -21,8 +21,6 @@ function Home() {
     dispatch(getUsersHandler());
   }, [dispatch]);
 
-  console.log(users);
-
   const unanswered = (question) =>
     !question?.optionOne?.votes.includes(authedUser?.id) &&
     !question?.optionTwo?.votes.includes(authedUser?.id);
@@ -30,8 +28,6 @@ function Home() {
   const answered = (question) =>
     question?.optionOne?.votes.includes(authedUser?.id) ||
     question?.optionTwo?.votes.includes(authedUser?.id);
-
-  console.log(questions);
 
   return (
     <div>

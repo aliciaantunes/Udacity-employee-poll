@@ -8,9 +8,7 @@ const questionsSlice = createSlice({
   reducers: {
     updateQuestions: (state, action) => {
       // transform action.payload to an array
-      console.log('action.payload:', action.payload);
       const newQuestions = Object.values(action.payload);
-      console.log('newQuestions:', newQuestions);
 
       return newQuestions;
     },

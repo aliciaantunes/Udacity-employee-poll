@@ -10,7 +10,6 @@ function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Username: ${username}, Password: ${password}`);
     dispatch(loginHandler(username, password));
   };
 
