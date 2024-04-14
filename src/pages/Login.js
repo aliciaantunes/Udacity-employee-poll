@@ -1,22 +1,17 @@
+/* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addQuestionHandler } from '../redux/action-handlers/questionsActions';
+import { useDispatch } from 'react-redux';
+// eslint-disable-next-line import/no-unresolved
+import { loginHandler } from '../redux/action-handlers/sessionActions';
 
 function LoginForm() {
   const dispatch = useDispatch();
-  const authedUser = useSelector((state) => state.session.user);
-  const [optionOne, setoptionOne] = useState('');
-  const [optionTwo, setoptionTwo] = useState('');
+  const [username, setUsername] = useState('tylermcginnis');
+  const [password, setPassword] = useState('abc321');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(
-      addQuestionHandler({
-        author: authedUser.id,
-        optionOneText: optionOne,
-        optionTwoText: optionTwo,
-      })
-    );
+    dispatch(loginHandler(username, password));
   };
 
   return (
@@ -28,30 +23,30 @@ function LoginForm() {
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="optionOne"
+            htmlFor="username"
           >
-            Option One:
+            Username:
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="optionOne"
+              id="username"
               type="text"
-              value={optionOne}
-              onChange={(e) => setoptionOne(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </label>
         </div>
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="optionTwo"
+            htmlFor="password"
           >
-            Option Two:
+            Password:
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="optionTwo"
-              type="optionTwo"
-              value={optionTwo}
-              onChange={(e) => setoptionTwo(e.target.value)}
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </label>
         </div>
@@ -66,5 +61,4 @@ function LoginForm() {
     </div>
   );
 }
-
 export default LoginForm;
