@@ -7,6 +7,9 @@ import Card from '../components/Card';
 function Home() {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.questions);
+  const sortedQuestions = [...questions].sort(
+    (a, b) => b.timestamp - a.timestamp
+  );
   const users = useSelector((state) => state.users);
   const authedUser = useSelector((state) => state.session.user);
 
@@ -21,14 +24,14 @@ function Home() {
   console.log(users);
 
   const unanswered = (question) =>
-    !question?.optionOne?.votes.includes(authedUser.id) &&
-    !question?.optionTwo?.votes.includes(authedUser.id);
+    !question?.optionOne?.votes.includes(authedUser?.id) &&
+    !question?.optionTwo?.votes.includes(authedUser?.id);
 
   const answered = (question) =>
-    question?.optionOne?.votes.includes(authedUser.id) ||
-    question?.optionTwo?.votes.includes(authedUser.id);
+    question?.optionOne?.votes.includes(authedUser?.id) ||
+    question?.optionTwo?.votes.includes(authedUser?.id);
 
-  console.log(answered);
+  console.log(questions);
 
   return (
     <div>
@@ -41,7 +44,7 @@ function Home() {
 
       <h2 className="text-2xl font-bold mt-6">New Questions</h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {questions.filter(unanswered).map((question) => (
+        {sortedQuestions.filter(unanswered).map((question) => (
           <li key={question.id}>
             <Card
               question={question}
@@ -53,7 +56,7 @@ function Home() {
 
       <h2 className="text-2xl font-bold mt-6">Answered Questions</h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {questions.filter(answered).map((question) => (
+        {sortedQuestions.filter(answered).map((question) => (
           <li key={question.id}>
             <Card
               question={question}
