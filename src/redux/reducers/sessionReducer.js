@@ -6,9 +6,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: sessionStorage.getItem('userToken')
-    ? JSON.parse(sessionStorage.getItem('userToken'))
-    : null,
+  user: null,
 };
 
 const sessionSlice = createSlice({
@@ -17,15 +15,11 @@ const sessionSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
-      sessionStorage.setItem('userToken', JSON.stringify(action.payload));
     },
     logout: (state) => {
       state.user = null;
-      sessionStorage.removeItem('userToken');
     },
   },
 });
-
 export const { login, logout } = sessionSlice.actions;
-
 export default sessionSlice.reducer;

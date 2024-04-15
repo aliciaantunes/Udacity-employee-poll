@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Switch } from 'wouter';
+// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import GateKeeper from './components/GateKeeper';
 import Nav from './components/Navbar';
 import Login from './pages/Login';
@@ -12,31 +13,33 @@ import NotFound from './pages/404';
 function Pages() {
   return (
     <div>
-      <GateKeeper publicPaths={[]} />
-      <Nav />
-      <Switch>
-        <Route
-          path="/login"
-          component={Login}
-        />
-        <Route
-          path="/"
-          component={Home}
-        />
-        <Route
-          path="/new"
-          component={NewQuestion}
-        />
-        <Route
-          path="/leaderboard"
-          component={LeaderBoard}
-        />
-        <Route
-          path="/questions/:id"
-          component={Poll}
-        />
-        <Route component={NotFound} />
-      </Switch>
+      <Router>
+        <Nav />
+        <GateKeeper />
+        <Switch>
+          <Route
+            exact
+            path="/"
+          >
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/new">
+            <NewQuestion />
+          </Route>
+          <Route path="/leaderboard">
+            <LeaderBoard />
+          </Route>
+          <Route path="/questions/:id">
+            <Poll />
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

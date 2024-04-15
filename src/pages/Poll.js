@@ -1,13 +1,14 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useLocation } from 'wouter';
+// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
+import { useParams, useLocation } from 'react-router-dom';
 // eslint-disable-next-line import/named
 import { addQuestionAnswerHandler } from '../redux/action-handlers/questionsActions';
 
 function PollPage() {
   // eslint-disable-next-line no-unused-vars
-  const [_, setLocation] = useLocation();
+  const location = useLocation();
   const { id } = useParams();
   const dispatch = useDispatch();
   const authedUser = useSelector((state) => state.session.user);
@@ -17,9 +18,9 @@ function PollPage() {
 
   useEffect(() => {
     if (authedUser && !question) {
-      setLocation('/404'); // Use setLocation for navigation
+      // setLocation('/404'); // Use setLocation for navigation
     }
-  }, [authedUser, question, setLocation]);
+  }, [authedUser, question]);
 
   const hasVotedForOptionOne = question?.optionOne.votes.includes(
     authedUser.id

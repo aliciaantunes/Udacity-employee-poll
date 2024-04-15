@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'wouter';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Link } from 'react-router-dom';
 // eslint-disable-next-line import/no-unresolved
 import { logoutHandler } from '../redux/action-handlers/sessionActions';
 

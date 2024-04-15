@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { Link } from 'wouter';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
