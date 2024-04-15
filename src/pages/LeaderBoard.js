@@ -1,12 +1,18 @@
 /* eslint-disable react/jsx-filename-extension */
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUsersHandler } from '../redux/action-handlers/userActions';
 
 function LeaderBoard() {
+  const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
   const usersSorted = Object.values(users).sort(
     (a, b) => Object.keys(b.answers).length - Object.keys(a.answers).length
   );
+
+  useEffect(() => {
+    dispatch(getUsersHandler());
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col">

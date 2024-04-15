@@ -1,17 +1,21 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// eslint-disable-next-line import/no-unresolved
+import { useLocation, useNavigate } from 'react-router-dom';
 import { loginHandler } from '../redux/action-handlers/sessionActions';
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [username, setUsername] = useState('tylermcginnis');
   const [password, setPassword] = useState('abc321');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(loginHandler(username, password));
+    dispatch(loginHandler(username, password)).then(() => {
+      navigate(location.state?.path || '/');
+    });
   };
 
   return (

@@ -1,7 +1,6 @@
 import React from 'react';
-// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import GateKeeper from './components/GateKeeper';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RequireAuth from './components/RequireAuth';
 import Nav from './components/Navbar';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -15,32 +14,51 @@ function Pages() {
     <div>
       <Router>
         <Nav />
-        <GateKeeper />
-        <Switch>
+        <Routes>
           <Route
-            exact
             path="/"
-          >
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/new">
-            <NewQuestion />
-          </Route>
-          <Route path="/leaderboard">
-            <LeaderBoard />
-          </Route>
-          <Route path="/questions/:id">
-            <Poll />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
+            element={
+              <RequireAuth>
+                <Home />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/new"
+            element={
+              <RequireAuth>
+                <NewQuestion />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/leaderboard"
+            element={
+              <RequireAuth>
+                <LeaderBoard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/questions/:id"
+            element={
+              <RequireAuth>
+                <Poll />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/login"
+            element={<Login />}
+          />
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
+        </Routes>
       </Router>
     </div>
   );
 }
+
 export default Pages;

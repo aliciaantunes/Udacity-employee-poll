@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { render } from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // redux imports
 import { Provider } from 'react-redux';
@@ -16,7 +17,7 @@ describe('Login', () => {
   let store;
 
   beforeEach(() => {
-    // Aqui nós conjuramos nossa loja Redux antes de cada teste
+    // Create our Redux store before each test
     store = configureStore({
       reducer: {
         login: loginSlice,
@@ -26,21 +27,22 @@ describe('Login', () => {
 
   it('should render the component without crashing', () => {
     render(
-      <Provider store={store}>
-        <LoginForm />
-      </Provider>
+      <Router>
+        <Provider store={store}>
+          <LoginForm />
+        </Provider>
+      </Router>
     );
   });
 
-  // Provides a link to the registration page for new users.
-
-  // Renders a login form with two input fields for username and password.
   it('should render a login form with two input fields', () => {
     // Arrange
     const { getByLabelText } = render(
-      <Provider store={store}>
-        <LoginForm />
-      </Provider>
+      <Router>
+        <Provider store={store}>
+          <LoginForm />
+        </Provider>
+      </Router>
     );
 
     // Act
